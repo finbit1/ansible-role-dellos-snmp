@@ -166,6 +166,8 @@ When *dellos_cfg_generate* is set to true, the variable generates the configurat
           encryption: true
           auth_algorithm: md5
           auth_pass: 12345678
+          priv_algorithm: aes128
+          priv_pass: 987654321
           state: present
       snmp_group:
         - name: group_1
