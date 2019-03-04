@@ -57,6 +57,8 @@ Role variables
 | ``snmp_user.encryption`` | boolean: true,false\* | Specifies the encryption for the SNMP user if set to true | dellos9 |
 | ``snmp_user.auth_algorithm`` | string: md5,sha | Configures the authorization algorithm for the SNMP user | dellos9 |
 | ``snmp_user.auth_pass`` | string | Configures the authentication password for the user  | dellos9 |
+| ``snmp_user.priv_algorithm`` | string: des56,aes128 | Configures the privacy algorithm for the SNMP user | dellos9 |
+| ``snmp_user.priv_pass`` | string | Configures the privacy password for the user  | dellos9 |
 | ``snmp_user.state`` | string: absent,present\* | Deletes the SNMP user if set to absent | dellos9 |
 | ``snmp_group``      | list | Configures SNMP groups (see ``snmp_group.*``) | dellos9  |
 | ``snmp_group.name`` | string (required) | Configures the SNMP group name | dellos9 |

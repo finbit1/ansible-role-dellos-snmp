@@ -47,6 +47,8 @@ dellos_snmp:
         encryption : true
         auth_algorithm: md5
         auth_pass: 12345678
+        priv_algorithm: aes128
+        priv_pass: 987654321
         version: 3
         access_list:
           access: a2
@@ -316,7 +318,15 @@ snmp-server user {{ item.name }} {{ item.group_name }} {{ item.version|string }}
 no snmp-server user {{ item.name }} {{ item.group_name }} 3
               {% else %}
                 {% if item.access_list is defined and item.access_list %}
-                  {% if item.encryption is defined and item.encryption and item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.access_list.access is defined and item.access_list.access and item.access_list.ipv6 is defined and item.access_list.ipv6 %}
+                  {% if item.encryption is defined and item.encryption and item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.priv_algorithm is defined and item.priv_algorithm and item.priv_pass is defined and item.priv_pass and item.access_list.access is defined and item.access_list.access and item.access_list.ipv6 is defined and item.access_list.ipv6 %}
+snmp-server user {{ item.name }} {{ item.group_name }} 3 encrypted auth {{ item.auth_algorithm }} {{ item.auth_pass }} priv {{ item.priv_algorithm }} {{ item.priv_pass }} access {{ item.access_list.access }} ipv6 {{ item.access_list.ipv6 }}
+                  {% elif item.encryption is defined and item.encryption and item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.priv_algorithm is defined and item.priv_algorithm and item.priv_pass is defined and item.priv_pass and item.access_list.access is defined and item.access_list.access %}
+snmp-server user {{ item.name }} {{ item.group_name }} 3 encrypted auth {{ item.auth_algorithm }} {{ item.auth_pass }} priv {{ item.priv_algorithm }} {{ item.priv_pass }} access {{ item.access_list.access }} 
+                  {% elif item.encryption is defined and item.encryption and item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.priv_algorithm is defined and item.priv_algorithm and item.priv_pass is defined and item.priv_pass and item.access_list.ipv6 is defined and item.access_list.ipv6 %}
+snmp-server user {{ item.name }} {{ item.group_name }} 3 encrypted auth {{ item.auth_algorithm }} {{ item.auth_pass }} priv {{ item.priv_algorithm }} {{ item.priv_pass }} ipv6 {{ item.access_list.ipv6 }}   
+                  {% elif item.encryption is defined and item.encryption and item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.priv_algorithm is defined and item.priv_algorithm and item.priv_pass is defined and item.priv_pass %}
+snmp-server user {{ item.name }} {{ item.group_name }} 3 encrypted auth {{ item.auth_algorithm }} {{ item.auth_pass }} priv {{ item.priv_algorithm }} {{ item.priv_pass }}
+                  {% elif item.encryption is defined and item.encryption and item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.access_list.access is defined and item.access_list.access and item.access_list.ipv6 is defined and item.access_list.ipv6 %}
 snmp-server user {{ item.name }} {{ item.group_name }} 3 encrypted auth {{ item.auth_algorithm }} {{ item.auth_pass }} access {{ item.access_list.access }} ipv6 {{ item.access_list.ipv6 }}
                   {% elif item.encryption is defined and item.encryption and item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.access_list.access is defined and item.access_list.access %}
 snmp-server user {{ item.name }} {{ item.group_name }} 3 encrypted auth {{ item.auth_algorithm }} {{ item.auth_pass }} access {{ item.access_list.access }} 
@@ -324,6 +334,14 @@ snmp-server user {{ item.name }} {{ item.group_name }} 3 encrypted auth {{ item.
 snmp-server user {{ item.name }} {{ item.group_name }} 3 encrypted auth {{ item.auth_algorithm }} {{ item.auth_pass }} ipv6 {{ item.access_list.ipv6 }}   
                   {% elif item.encryption is defined and item.encryption and item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass %}
 snmp-server user {{ item.name }} {{ item.group_name }} 3 encrypted auth {{ item.auth_algorithm }} {{ item.auth_pass }}
+                  {% elif item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.priv_algorithm is defined and item.priv_algorithm and item.priv_pass is defined and item.priv_pass and item.access_list.access is defined and item.access_list.access and item.access_list.ipv6 is defined and item.access_list.ipv6 %}
+snmp-server user {{ item.name }} {{ item.group_name }} 3 auth {{ item.auth_algorithm }} {{ item.auth_pass }} priv {{ item.priv_algorithm }} {{ item.priv_pass }} access {{ item.access_list.access }} ipv6 {{ item.access_list.ipv6 }}  
+                  {% elif item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.priv_algorithm is defined and item.priv_algorithm and item.priv_pass is defined and item.priv_pass and item.access_list.access is defined and item.access_list.access %}
+snmp-server user {{ item.name }} {{ item.group_name }} 3 auth {{ item.auth_algorithm }} {{ item.auth_pass }} priv {{ item.priv_algorithm }} {{ item.priv_pass }} access {{ item.access_list.access }} 
+                  {% elif item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.priv_algorithm is defined and item.priv_algorithm and item.priv_pass is defined and item.priv_pass and item.access_list.ipv6 is defined and item.access_list.ipv6 %}
+snmp-server user {{ item.name }} {{ item.group_name }} 3 auth {{ item.auth_algorithm }} {{ item.auth_pass }} priv {{ item.priv_algorithm }} {{ item.priv_pass }} access {{ item.access_list.access }} ipv6 {{ item.access_list.ipv6 }}
+                  {% elif item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.priv_algorithm is defined and item.priv_algorithm and item.priv_pass is defined and item.priv_pass %}
+snmp-server user {{ item.name }} {{ item.group_name }} 3 auth {{ item.auth_algorithm }} {{ item.auth_pass }} priv {{ item.priv_algorithm }} {{ item.priv_pass }}
                   {% elif item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.access_list.access is defined and item.access_list.access and item.access_list.ipv6 is defined and item.access_list.ipv6 %}
 snmp-server user {{ item.name }} {{ item.group_name }} 3 auth {{ item.auth_algorithm }} {{ item.auth_pass }} access {{ item.access_list.access }} ipv6 {{ item.access_list.ipv6 }}  
                   {% elif item.auth_algorithm is defined and item.auth_algorithm and item.auth_pass is defined and item.auth_pass and item.access_list.access is defined and item.access_list.access %}
